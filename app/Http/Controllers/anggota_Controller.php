@@ -131,4 +131,22 @@ class anggota_Controller extends Controller
             'anggotas'=>User::all()
         ]);
     }
+    public function keluar(Request $request)
+    {
+        if( user::find($request->user_id)->hak_akses =='ADMINISTRATOR'){
+            return back()->with('pesan','Administrator Tidak Bisa Dikeluarkan');
+        }
+        user::find($request->user_id)->update([
+            'simpanan_wajib'=> 0,
+            'simpanan_sukarela'=> 0,
+            'hak_akses'=>'Keluar'
+        ]);
+        simpanan::where('user_id', $request->user_id)->update([
+            'simpanan_suka_rela'=> 0,
+        ]);
+        simpanan_Wajib::where('user_id', $request->user_id)->update([
+            'simpanan_wajib'=> 0,
+        ]);
+        return back()->with('pesan','Anggota Berhasil Dikeluarkan');
+    }
 }

@@ -137,7 +137,13 @@
                                         <li><button type="button" class="dropdown-item" data-bs-toggle="modal"
                                                 data-bs-target="#simpanansukarela{{ $anggota->id }}">Setor Simpanan
                                                 Sukarela</button></li>
-                                        {{-- <li><a class="dropdown-item" href="#">Keluar ?</a></li> --}}
+                                        <li>
+                                            <form action="/keluar" method="post">
+                                                @csrf
+                                                <input type="hidden" name="user_id" value="{{ $anggota->id }}">
+                                                <button class="dropdown-item" type="submit" onclick="return confirm('Yakin Ingin Mengeluarkan {{ $anggota->name }} dengan ID {{ $anggota->id }} ?')">Keluar ? </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>

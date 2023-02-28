@@ -5,14 +5,49 @@
             <div class="d-flex justify-content-center mt-3">
 
                 <div class="col-11">
-                    <div class="h3 text-center">Pembagian SHU</div>
-                    <div class="d-flex justify-content-between">
+                    
+                    <div class="row align-items-center">
+
+                        <div class="col-3">
+                            @if (url('') == 'http://127.0.0.1:8000')
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12 d-flex justify-content-center">
+                                        <img class="img-preview " style="display: block;"
+                                            src="{{ url('') . '/logo/' . $profil->logo }} " width="40%">
+                                    </div>
+                                </div>
+                            @else
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12 d-flex justify-content-center">
+                                        <img class="img-preview " style="display: block;"
+                                            src="{{ url('') . '/public/logo/' . $profil->logo }} " width="40%">
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-8 text-center">
+                            <h3>Koperasi {{ $profil->nama_koperasi }}</h3>
+                            <p>{{ $profil->alamat }} {{ $profil->telepon }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                
+                    <div class="h3 text-center mb-2">Pembagian SHU</div>
+                    <div class="d-flex justify-content-between mt-3">
 
                         <button type="button" class="btn btn-success text-white col-2 mb-3" data-bs-toggle="modal"
                             data-bs-target="#tambah">Selesai Periode
                         </button>
-                        <button type="button" class="btn btn-danger col-4 mb-3">Total SHU Periode Ini @format($total_shu_kotor)
-                        </button>
+                        <div class="d-flex justify-content-end col-8">
+                            <button type="button" class="btn btn-danger col-4 mb-3">
+                                Total SHU Periode Ini @format($total_shu_kotor)
+                            </button>
+                            <button type="button" class=" ms-1 btn btn-danger col-5 mb-3">
+                                Sisa SHU Periode Sebelumnya @format($sisa_shu)
+                            </button>
+
+                        </div>
+                       
                     </div>
 
                     <!-- Modal tambah shu -->
@@ -33,6 +68,14 @@
                                             <input type="text" name="nominal" placeholder="Contoh: 5000000"
                                                 class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                                                 value="{{ $total_shu_kotor }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Sisa SHU Periode Sebelumnya</label>
+                                            <input type="text" name="sisa_shu_sebelumnya" placeholder="Contoh: 5000000"
+                                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                value="{{ $sisa_shu }}" readonly>
                                         </div>
                                     </div>
                                     <div class="modal-body">
@@ -81,7 +124,7 @@
                             <th>BAGI</th>
                         </tr>
                         @foreach ($shu as $shu)
-                            <tr class="text-center table-secondary">
+                            <tr class="text-center ">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $shu->id }}</td>
                                 <td>{{ $shu->created_at }}</td>
@@ -98,17 +141,17 @@
                                             Aksi
                                         </button>
                                         <ul class="dropdown-menu">
-                                            @if($shu->pembagian_shu->count() == 0 )
-                                            <li>
-                                                <form action='/shu-bagi/{{ $shu->id }}' method='POST'>
-                                                    @csrf
-                                                    <input type='hidden' name='shu_id' value='{{ $shu->id }}'>
-                                                    <button class='dropdown-item' type='submit'
-                                                        onclick="return confirm('Yakin Ingin Membagi SHU ?')">
-                                                        Bagi
-                                                    </button>
-                                                    <form>
-                                            </li>
+                                            @if ($shu->pembagian_shu->count() == 0)
+                                                <li>
+                                                    <form action='/shu-bagi/{{ $shu->id }}' method='POST'>
+                                                        @csrf
+                                                        <input type='hidden' name='shu_id' value='{{ $shu->id }}'>
+                                                        <button class='dropdown-item' type='submit'
+                                                            onclick="return confirm('Yakin Ingin Membagi SHU ?')">
+                                                            Bagi
+                                                        </button>
+                                                        <form>
+                                                </li>
                                             @endif
                                             <li><a class="dropdown-item" href="/shu-penerima/{{ $shu->id }}">lihat
                                                     Hasil Peneriman</a></li>

@@ -72,6 +72,7 @@ Route::name('anggota.')->group(function () {
     Route::post('/anggota',[anggota_controller::class, 'create'])->name('tambah')->Middleware('auth');
     Route::get('/anggota/{id}',[anggota_controller::class, 'show'])->name('show')->Middleware('auth');
     Route::post('/anggota/update',[anggota_controller::class, 'update'])->name('update')->Middleware('auth');
+    Route::post('/keluar',[anggota_controller::class, 'keluar'])->name('keluar')->Middleware('auth');
 });
 Route::name('ajax.')->group(function () {
     Route::get('/ajax/simpanan-wajib/{parameter}',[anggota_controller::class, 'ajaxSimpananWajib'])->name('simpanan.wajib')->Middleware('auth');
@@ -89,6 +90,10 @@ Route::get('/print/{pinjaman_id}',[pinjaman_controller::class, 'print'])->name('
 Route::post('/download/simpanan',[laporan_controller::class, 'downloadSimpanan'])->name('downloadSimpanan')->Middleware('auth');
 Route::post('/download/angsuran',[laporan_controller::class, 'downloadAngsuran'])->name('downloadAngsuran')->Middleware('auth');
 Route::post('/download/anggota',[laporan_controller::class, 'downloadAnggota'])->name('downloadAnggota')->Middleware('auth');
+Route::get('/print-simpanan',[laporan_controller::class, 'printSimpanan'])->name('downloadAnggota')->Middleware('auth');
+Route::get('/print-angsuran',[laporan_controller::class, 'printAngsuran'])->name('downloadAnggota')->Middleware('auth');
+Route::get('/print-anggota',[laporan_controller::class, 'printAnggota'])->name('downloadAnggota')->Middleware('auth');
+Route::get('/print-penerima-shu/{id}',[shu_controller::class, 'printPenerimaShu'])->name('downloadAnggota')->Middleware('auth');
 
 
 

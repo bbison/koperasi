@@ -4,7 +4,6 @@
         <th>NAMA ANGGOTA</th>
         <th>TANGGAL MASUK</th>
         <th>SIMPANAN WAJIB</th>
-        <th>SIMPANAN POKOK</th>
         <th>SIMPANAN SUKARELA</th>
         <th>ACTION</th>
     </tr>
@@ -13,8 +12,7 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $anggota->name }}</td>
             <td>{{ $anggota->created_at }}</td>
-            <td>{{ $anggota->simpanan_wajib }}</td>
-            <td> @format($anggota->simpanan_pokok) </td>
+            <td> @format($anggota->simpanan_wajib) </td>
             <td> @format($anggota->simpanan_sukarela) </td>
 
             <td>

@@ -5,7 +5,32 @@
             <div class="d-flex justify-content-center mt-3">
 
                 <div class="col-11">
-                    <div class="h3 text-center">Riwayat Pembagian SHU</div>
+                    <div class="row align-items-center">
+
+                        <div class="col-3">
+                            @if (url('') == 'http://127.0.0.1:8000')
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12 d-flex justify-content-center">
+                                        <img class="img-preview " style="display: block;"
+                                            src="{{ url('') . '/logo/' . $profil->logo }} " width="40%">
+                                    </div>
+                                </div>
+                            @else
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-12 d-flex justify-content-center">
+                                        <img class="img-preview " style="display: block;"
+                                            src="{{ url('') . '/public/logo/' . $profil->logo }} " width="40%">
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-8 text-center">
+                            <h3>Koperasi {{ $profil->nama_koperasi }}</h3>
+                            <p>{{ $profil->alamat }} {{ $profil->telepon }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="h3 text-center m-2">Riwayat Pembagian SHU</div>
 
                     <!-- Modal tambah shu -->
 
@@ -23,7 +48,7 @@
                             <th>LIHAT PENERIMA</th>
                         </tr>
                         @foreach ($shu as $shu)
-                            <tr class="text-center table-secondary">
+                            <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $shu->id }}</td>
                                 <td>{{ $shu->created_at }}</td>

@@ -131,8 +131,12 @@ class pinjaman_controller extends Controller
 
          //cek
          $data = pinjaman::where('user_id', $request->peminjam)->where('status_pinjaman', 'Aktif')->get();
+         $data_2 = pinjaman::where('user_id', $request->peminjam)->where('status_pinjaman', 'Menunggu Verifikasi')->get();
          if($data->count() != 0 ){
             return back()->with('pesan', 'Peminjam Masih Memiliki Pinjaman Aktif');
+         }
+         elseif($data_2->count()!= 0 ){
+            return back()->with('pesan', 'Peminjam Masih Memiliki Pinjaman Yang Menunggu Verifikasi');
          }
          
         pinjaman::create([
@@ -227,6 +231,9 @@ class pinjaman_controller extends Controller
     }
     public function createBunga(Request $request)
     {
+        if(bunga_pinjaman::where('bunga',$request->bunga)->count() >= 1){
+             return back()->with('pesan', 'Bunga Sudah Ada ');
+        }
         bunga_pinjaman::create([
             'bunga'=>$request->bunga
         ]);

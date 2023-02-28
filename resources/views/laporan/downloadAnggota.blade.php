@@ -2,21 +2,21 @@
     <div class="col-11 mt-3">
         <div class="row align-items-center" style="display:flex;flex">
             <div class="col-3" style="width: 10%">
-                {{-- @if (url('') == 'http://127.0.0.1:8000') --}}
-                    {{-- <div class="row justify-content-center">
+                @if (url('') == 'http://127.0.0.1:8000')
+                    <div class="row justify-content-center">
                         <div class="col-sm-12 d-flex justify-content-center">
                             <img class="img-preview " style="display: block;"
                                 src=" /logo/{{ $profil->logo }}" width="40%">
                         </div>
-                    </div> --}}
-                {{-- @else
+                    </div>
+                @else
                     <div class="row justify-content-center">
                         <div class="col-sm-12 d-flex justify-content-center">
                             <img class="img-preview " style="display: block;"
                                 src="{{ url('') . '/public/logo/' . $profil->logo }} " width="40%">
                         </div>
                     </div>
-                @endif --}}
+                @endif
             </div>
             <div class="col-8 text-center" style="text-align: center; width:70%">
                 <h3>Koperasi {{ $profil->nama_koperasi }}</h3>

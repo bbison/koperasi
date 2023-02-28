@@ -22,6 +22,15 @@ class laporan_controller extends Controller
         'profil'=>profil::find(1)
        ]);
     }
+    public function printSimpanan()
+    {
+       return view('laporan.printSimpanan',[
+        'user'=>User::orderBy('name','ASC')->get(),
+        'profil'=>profil::find(1)
+       ]);
+    }
+
+
     public function simpananWajib()
     {
         return view('laporan.simpananWajib',[
@@ -44,10 +53,25 @@ class laporan_controller extends Controller
             'profil'=>profil::find(1)
         ]);
     }
+    public function printAngsuran()
+    {
+        return view('laporan.printAngsuran',[
+            'pinjaman'=>pinjaman::orderBy('id', 'ASC')->get(),
+            'profil'=>profil::find(1)
+        ]);
+    }
+    
     
     public function anggota()
     {
         return view('laporan.anggota',[
+            'anggota'=>user::orderBy('name','ASC')->get(),
+            'profil'=>profil::find(1)
+        ]);
+    }
+    public function printAnggota()
+    {
+        return view('laporan.printAnggota',[
             'anggota'=>user::orderBy('name','ASC')->get(),
             'profil'=>profil::find(1)
         ]);

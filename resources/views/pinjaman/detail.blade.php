@@ -55,15 +55,15 @@
                     @foreach ($pinjaman->angsuran as $angsuran)
                         <tr>
                             <td>{{ $angsuran->jatuh_tempo }}</td>
-                            <td>@format($angsuran->tagihan_angsuran)</td>
-                            <td>
+                            <td class="text-end">@format($angsuran->tagihan_angsuran)</td>
+                            <td class="text-center">
                                 {{ $angsuran->status }}
                             </td>
-                            <td class="col-3">
+                            <td class="col-2">
                                 @if ($angsuran->status == 'Sudah Bayar')
-                                    <div class="d-flex jutify-content-between">
-                                        <a class=" d-inline btn btn-success me-2"
-                                            href="{{ url('') }}/pinjaman/detail/{{ $pinjaman->id }}/{{ $angsuran->id }}">Download</a>
+                                    <div class="d-flex justify-content-center">
+                                        {{-- <a class=" d-inline btn btn-success me-2"
+                                            href="{{ url('') }}/pinjaman/detail/{{ $pinjaman->id }}/{{ $angsuran->id }}">Download</a> --}}
                                         <a class=" d-inline btn btn-primary" target="_Blank"
                                             href="{{ url('') }}/pinjaman/print/{{ $pinjaman->id }}/{{ $angsuran->id }}">Print</a>
                                        

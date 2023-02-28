@@ -10,7 +10,7 @@
                 <td>:  {{ $anggota->id }}</td>
             </tr>
         </table>
-        <div class="fs-3 text-start">Simpanan Wajib</div>
+        <div class="text-start fs-5">Jenis : Simpanan Wajib</div>
         <hr>
         <table class="table table-striped mt-2 text-start fs-5">
             <tr>
@@ -29,6 +29,7 @@
                 <th>@currency($anggota->simpanan_wajib)</th>
             </tr>
         </table>
+        <small>*Untuk Menambah Simpanan Silahkan Ke Menu Daftar Anggota</small>
 
     </div>
 

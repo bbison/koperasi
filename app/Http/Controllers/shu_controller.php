@@ -31,17 +31,25 @@ class shu_controller extends Controller
             $bunga_terbayar = $shu->tagihan_angsuran - $shu->pinjaman->angsuran_pokok;
             array_push($nominal_shu, $bunga_terbayar);
         }
+
+        if(shu::count()==0){
+            $sisa_shu = 0;
+        }
+        else{
+            $sisa_shu = shu::latest()->first()->sisa_shu;
+        }
        
         return view('shu.index',[
            'total_shu_kotor'=>array_sum($nominal_shu),
            'profil'=>profil::find(1),
-           'shu'=>shu::latest()->get(),
+           'shu'=>shu::orderBy('id','ASC')->get(),
+           'sisa_shu' => $sisa_shu
         ]);
     }
     public function store(Request $request)
     {
         
-        $shu_bersih = (intval($request->nominal) - intval($request->operasional) ) ;
+        $shu_bersih = (intval($request->nominal) - intval($request->operasional) + $request->sisa_shu_sebelumnya ) ;
         $sisa_shu =((100 - intval($request->presentase)) /100 ) * $shu_bersih   ;
     
         // $sisa_shu = 
@@ -51,7 +59,7 @@ class shu_controller extends Controller
         // ]);
      
         shu::create([
-            'besar_shu_kotor'=>intval($request->nominal),
+            'besar_shu_kotor'=>intval($request->nominal) + $request->sisa_shu_sebelumnya  ,
             'besar_shu_bersih'=>$shu_bersih,
             'biaya_operasional'=>intval($request->operasional),
             'presentase_pembagian'=>intval($request->presentase),
@@ -83,6 +91,17 @@ class shu_controller extends Controller
             'besar_bagi_shu'=>shu::find($idshu)->besar_shu - shu::find($idshu)->sisa_shu ,
         ]);
     }
+    public function printPenerimaShu($idshu)
+    {
+        return view('shu.printPenerima',[
+            'penerima'=>pembagian_shu::where('shu_id',$idshu)->get(),
+            'profil'=>profil::find(1),
+            'shu'=>shu::find($idshu),
+            'besar_bagi_shu'=>shu::find($idshu)->besar_shu - shu::find($idshu)->sisa_shu ,
+        ]);
+    }
+
+
     public function bagi( $shu_id, Request $request)
     {
        
@@ -90,7 +109,16 @@ class shu_controller extends Controller
        if(pembagian_shu::where('shu_id',$shu->id)->count() >= 1){
         return back()->with('pesan', 'SHU Sudah Dibagi');
        }
-       $nominal = intval($shu->besar_shu_bersih) - intval($shu->sisa_shu) ;
+       if(shu::count()>=2){
+        $id = shu::count();
+        $shusebelumnya = shu::find($id -1);
+        $sisa_shu_sebelumnya = $shusebelumnya->sisa_shu;
+       }
+       else{
+        $sisa_shu_sebelumnya = 0;
+       }
+
+       $nominal = intval($shu->besar_shu_bersih) - intval($shu->sisa_shu) + $sisa_shu_sebelumnya ;
    
         $total_modal_semua_anggota = [];
 

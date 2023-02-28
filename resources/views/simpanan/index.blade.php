@@ -15,7 +15,7 @@
                 <div class="mb-3 col-3">
                     <select name="jenis_simpanan" id="jenis_simpanan" class="form-control">
                         <option value="">== Pilih Jenis Simpanan ==</option>
-                        <option value="simpanan_pokok">Simpanan Pokok</option>
+                        {{-- <option value="simpanan_pokok">Simpanan Pokok</option> --}}
                         <option value="simpanan_wajib">Simpanan Wajib</option>
                         <option value="simpanan_sukarela">Simpanan Suka Rela</option>
                     </select>

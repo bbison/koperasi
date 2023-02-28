@@ -35,17 +35,23 @@
             </form>
         </div>
     </div>
-    <table class="col-3 m-3">
+            @if (session('pesan'))
+            <div class="alert alert-success col-4 mt-3 alert-dismissible fade show" role="alert">
+                {{ session('pesan') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    <table class="col-4 m-3">
         <tr>
             <th>Bunga</th>
         </tr>
         @foreach ($bunga as $bunga)
             <tr>
                 <td>{{ $bunga->bunga }} % / Tahun</td>
-                <td><button type="button" class="btn btn-success text-white m-3" data-bs-toggle="modal"
+                {{-- <td><button type="button" class="btn btn-success text-white m-3" data-bs-toggle="modal"
                         data-bs-target="#edit{{ $bunga->id }}">
                         Edit Bunga
-                    </button></td>
+                    </button></td> --}}
             </tr>
             <div class="modal fade" id="edit{{ $bunga->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <form action="/bunga-pinjaman/edit/{{ $bunga->id }}" method="post">

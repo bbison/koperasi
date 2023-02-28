@@ -1,22 +1,30 @@
-@extends('layouts.sidebar')
-@section('body')
-    <div class="col-12 d-flex justify-content-center mt-3">
-        <main class="col-10">
-            <div class="row align-items-center">
-                <div class="row justify-content-end">
-                    <div class="col-4 d-flex justify-content-end ">
-                        <a href="/print-penerima-shu/{{ $shu->id }}" target="_Blank" class="mt-2 ms-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                class="bi bi-printer-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z" />
-                                <path
-                                    d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="{{ url('') }}/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        table {
+    border: solid #000 !important;
+    border-width: 1px 0 0 1px !important;
+}
+th, td {
+    border: solid #000 !important;
+    border-width: 0 1px 1px 0 !important;
+}
+    </style>
+
+</head>
+
+<body>
+    <div class="col-12 d-flex justify-content-center mt-3">
+        <main class="col-11">
+            <div class="row align-items-center">
                 <div class="col-3">
                     @if (url('') == 'http://127.0.0.1:8000')
                         <div class="row justify-content-center">
@@ -65,4 +73,12 @@
             </table>
         </main>
     </div>
-@endsection
+
+
+    <script>
+        window.print()
+    </script>
+
+
+</body>
+</html>

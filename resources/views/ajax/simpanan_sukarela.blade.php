@@ -10,7 +10,7 @@
                 <td>:  {{ $anggota->id }}</td>
             </tr>
         </table>
-        <div class="fs-5 text-start">Simpanan Sukarela</div>
+        <div class="fs-5 text-start">Jenis : Simpanan Sukarela</div>
         <hr>
         <table class="table table-striped mt-2 text-start fs-5">
             <tr>
@@ -28,6 +28,7 @@
                 <th>@currency($anggota->simpanan_sukarela)</th>
             </tr>
         </table>
+        <small>*Untuk Menambah Simpanan Silahkan Ke Menu Daftar Anggota</small>
 
     </div>
 
