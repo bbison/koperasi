@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('bunga_pinjamen', function (Blueprint $table) {
             $table->id();
-            $table->integer('bunga');
+            $table->decimal('bunga',8,2);
             $table->timestamps();
         });
     }

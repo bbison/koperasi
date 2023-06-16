@@ -8,9 +8,11 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Dashboard - SB Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
     <link href="{{ url('') }}/css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="{{ url('') }}/css/bootstraps.css" rel="stylesheet" />
+    {{-- <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script> --}}
+    <script src="{{ url('') }}/css/bootstraps.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -41,10 +43,64 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        @if(auth()->user()->hak_akses == 'ADMINISTRATOR')
+                        @if (auth()->user()->hak_akses == 'ADMINISTRATOR')
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#setting" aria-expanded="false" aria-controls="pagesCollapseError">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                                    </svg>
+                                </div>
+                                Setting
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="setting" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/profile" style="text-align:center">
+                                        <div class="sb-nav-link-icon">
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#setting"
-                            aria-expanded="false" aria-controls="pagesCollapseError">
+                                        </div>
+                                        Pengaturan Profil
+                                    </a>
+                                    <a class="nav-link" href="{{ route('pinjaman.bunga') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Pengaturan Bunga
+                                    </a>
+
+                                    <a class="nav-link" href="{{ route('profile.akun') }}">
+                                        <div class="sb-nav-link-icon">
+                                        </div>
+                                        Pengaturan Akun
+                                    </a>
+
+                                    <a class="nav-link" href="{{ route('pinjaman.lama') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Pengaturan Lama Pinjam
+                                    </a>
+                                </nav>
+                            </div>
+                        @endif
+                        @if (auth()->user()->hak_akses == 'ADMINISTRASI' or auth()->user()->hak_akses == 'ADMINISTRATOR')
+                            <a class="nav-link" href="{{ route('anggota.daftar') }}">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-wallet" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5V3zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a1.99 1.99 0 0 1-1-.268zM1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1z" />
+                                    </svg>
+                                </div>
+                                Daftar Anggota
+                            </a>
+                          
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#pinjaman" aria-expanded="false" aria-controls="pagesCollapseError">
                             <div class="sb-nav-link-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
@@ -52,164 +108,226 @@
                                         d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
                                 </svg>
                             </div>
-                            Setting
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="setting" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordionPages">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/profile" style="text-align:center">
-                                    <div class="sb-nav-link-icon">
-
-                                    </div>
-                                    Pengaturan Profil
-                                </a>
-                                <a class="nav-link" href="{{ route('pinjaman.bunga') }}">
-                                    <div class="sb-nav-link-icon">
-
-                                    </div>
-                                    Pengaturan Bunga
-                                </a>
-                                {{-- <a class="nav-link" href="{{ route('shu.pengaturan') }}">
-                                    <div class="sb-nav-link-icon">
-                                    </div>
-                                    Pengaturan SHU
-                                </a> --}}
-
-                                <a class="nav-link" href="{{ route('pinjaman.lama') }}">
-                                    <div class="sb-nav-link-icon">
-
-                                    </div>
-                                    Pengaturan Lama Pinjam
-                                </a>
-                            </nav>
-                        </div>
-                        @endif
-                        @if(auth()->user()->hak_akses == 'ADMINISTRASI' OR auth()->user()->hak_akses == 'ADMINISTRATOR' )
-
-                        <a class="nav-link" href="{{ route('anggota.daftar') }}">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-wallet" viewBox="0 0 16 16">
-                                    <path
-                                        d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5V3zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a1.99 1.99 0 0 1-1-.268zM1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1z" />
-                                </svg>
-                            </div>
-                            Daftar Anggota
-                        </a>
-                        <a class="nav-link" href="{{ route('pinjaman.index') }}">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
-                                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                                    <path
-                                        d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z" />
-                                </svg>
-                            </div>
                             Pinjaman
-                        </a>
-                        <a class="nav-link" href="{{ route('pinjaman.validasi') }}">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                    <path
-                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                    <path
-                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                </svg>
-                            </div>
-                            Validasi Pinjaman
-                        </a>
-                        <a class="nav-link" href="{{ route('pinjaman.pencairan') }}">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                    <path
-                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                    <path
-                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                </svg>
-                            </div>
-                            Pencairan Pinjaman
-                        </a>
-                        <a class="nav-link" href="{{ route('pinjaman.bayar') }}">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                                    <path
-                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                                    <path
-                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                                </svg>
-                            </div>
-                            Bayar Angsuran
-                        </a>
-                        <a class="nav-link" href="{{ route('simpanan.index') }}">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-wallet" viewBox="0 0 16 16">
-                                    <path
-                                        d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5V3zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a1.99 1.99 0 0 1-1-.268zM1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1z" />
-                                </svg>
-                            </div>
-                            Simpanan
-                        </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#bagishu" aria-expanded="false" aria-controls="pagesCollapseError">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16" class="me-1">
-                                    <path
-                                        d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
-                                    <path
-                                        d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
-                                </svg>
-                            </div>
-                            SHU
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="bagishu" aria-labelledby="headingOne"
+                        <div class="collapse" id="pinjaman" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordionPages">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('shu.index') }}">Pembagian SHU </a>
-                                <a class="nav-link" href="{{ route('shu.pembagian') }}">Penerima SHU</a>
-                            </nav>
-                        </div>
-                        @endif
-                        @if(auth()->user()->hak_akses == 'PIMPINAN' OR auth()->user()->hak_akses == 'ADMINISTRATOR' )
+                                <a class="nav-link" href="{{ route('pinjaman.index') }}">
+                                    <div class="sb-nav-link-icon">
 
-                        </a>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#pagesCollapseError" aria-expanded="false"
-                            aria-controls="pagesCollapseError">
-                            <div class="sb-nav-link-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16" class="me-1">
-                                    <path
-                                        d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
-                                    <path
-                                        d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
-                                </svg>
-                            </div>
-                            Laporan Laporan
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordionPages">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('laporan.simpanan') }}">Simpanan</a>
-                                <a class="nav-link" href="{{ route('laporan.angsuran') }}">Angsuran</a>
-                                <a class="nav-link" href="{{ route('laporan.anggota') }}">Data Anggota</a>
+                                    </div>
+                                    Pengajuan Pinjaman
+                                </a>
+                                <a class="nav-link" href="{{ route('laporan.pinjamanStaff') }}">
+                                    <div class="sb-nav-link-icon">
+
+                                    </div>
+                                   Piutang Staff
+                                </a>
+
+                                <a class="nav-link" href="{{ route('laporan.pinjamanProduksi') }}">
+                                    <div class="sb-nav-link-icon">
+                                    </div>
+                                  Piutang Produksi
+                                </a>
+                                <a class="nav-link" href="{{ route('laporan.pinjamanLainya') }}">
+                                    <div class="sb-nav-link-icon">
+                                    </div>
+                                  Piutang Lainya
+                                </a>
+                                <a class="nav-link" href="{{ route('importPinjaman') }}">
+                                    <div class="sb-nav-link-icon">
+                                    </div>
+                                  Import Pinjaman
+                                </a>
                             </nav>
                         </div>
+                            <a class="nav-link" href="{{ route('pinjaman.validasi') }}">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                        <path
+                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                        <path
+                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                    </svg>
+                                </div>
+                                Validasi Pinjaman
+                            </a>
+                            <a class="nav-link" href="{{ route('pinjaman.pencairan') }}">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                        <path
+                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                        <path
+                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                    </svg>
+                                </div>
+                                Pencairan Pinjaman
+                            </a>
+                            <a class="nav-link" href="{{ route('pinjaman.bayar') }}">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                        <path
+                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                        <path
+                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                                    </svg>
+                                </div>
+                                Bayar Angsuran
+                            </a>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#simpanan" aria-expanded="false" aria-controls="pagesCollapseError">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                                    </svg>
+                                </div>
+                                Simpanan
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="simpanan" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ route('simpanan.WajibStaff') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                       Simpanan Pokok Wajib Staff
+                                    </a>
+                                    <a class="nav-link" href="{{ route('simpanan.WajibProduksi') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                       Simpanan Pokok Wajib Produksi
+                                    </a>
+
+                                    <a class="nav-link" href="{{ route('simpanan.SukarelaStaff') }}">
+                                        <div class="sb-nav-link-icon">
+                                        </div>
+                                        Simpanan Sukarela Staff
+                                    </a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#bagishu" aria-expanded="false" aria-controls="pagesCollapseError">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16"
+                                        class="me-1">
+                                        <path
+                                            d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
+                                        <path
+                                            d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
+                                    </svg>
+                                </div>
+                                SHU
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="bagishu" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ route('shu.index') }}">Pembagian SHU </a>
+                                    <a class="nav-link" href="{{ route('shu.pembagian') }}">Penerima SHU</a>
+                                </nav>
+                            </div>
                         @endif
-                       
+                        @if (auth()->user()->hak_akses == 'PIMPINAN' or auth()->user()->hak_akses == 'ADMINISTRATOR')
+                            </a>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#pagesCollapseError" aria-expanded="false"
+                                aria-controls="pagesCollapseError">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16"
+                                        class="me-1">
+                                        <path
+                                            d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
+                                        <path
+                                            d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
+                                    </svg>
+                                </div>
+                                Laporan Laporan
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ route('laporan.simpanan') }}">Simpanan</a>
+                                    <a class="nav-link" href="{{ route('laporan.angsuran') }}">Angsuran</a>
+                                    <a class="nav-link" href="{{ route('laporan.anggota') }}">Data Anggota</a>
+                                    <a class="nav-link" href="{{ route('laporan.neracaAwalTahun') }}">Neraca</a>
+                                    {{-- <a class="nav-link" href="{{ route('laporan.neracaAkhirTahun') }}">Neraca Akhir Tahun</a> --}}
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                data-bs-target="#etting" aria-expanded="false" aria-controls="pagesCollapseError">
+                                <div class="sb-nav-link-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                                    </svg>
+                                </div>
+                                Journal Penyesuaian
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="etting" aria-labelledby="headingOne"
+                                data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{ route('profile.saldoAwal') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Saldo Awal
+                                    </a>
+                                    <a class="nav-link" href="{{ route('pinjaman.penyesuaian') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Penyesuaian Pinjaman
+                                    </a>
+                                    <a class="nav-link" href="{{ route('profile.ImportAnggota') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Import Data Anggota
+                                    </a>
+                                    <a class="nav-link" href="{{ route('profile.labaditahan') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Penjesuaian Laba Ditahan
+                                    </a>
+                                    <a class="nav-link" href="{{ route('profile.penyesuaianshu') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Penjesuaian SHU Yang Dibagi
+                                    </a>
+                                    {{-- <a class="nav-link" href="{{ route('profile.ImportPinjaman') }}">
+                                <div class="sb-nav-link-icon">
+
+                                </div>
+                                Import Pinjaman
+                            </a> --}}
+                                </nav>
+                            </div>
+                        @endif
+
 
                     </div>
                 </div>

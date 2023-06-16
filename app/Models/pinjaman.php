@@ -27,4 +27,10 @@ class pinjaman extends Model
     {
         return $this->hasMany(pembagian_shu::class);
     }
+    public function pinjamanstaff()
+    {
+        return $this->belongsTo(User::class)->where('bagian', 'STAFF')->get();
+    }
+
+
 }

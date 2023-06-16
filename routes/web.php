@@ -14,7 +14,8 @@ Route::get('/',[main_controller::class, 'index'])->name('login')->middleware('gu
 Route::post('/login',[main_controller::class, 'login'])->name('logiclogin')->middleware('guest');
 Route::get('/dashboard',[main_controller::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/logout',[main_controller::class, 'logout'])->name('logout')->Middleware('auth');
-
+Route::post('/import-anggota',[main_controller::class, 'prosesImportAnggota'])->name('proses,import.anggota')->Middleware('auth');
+Route::post('/import-pinjaman',[main_controller::class, 'prosesImportPinjaman'])->name('proses.import.pinjaman')->Middleware('auth');
 
 Route::name('shu.')->group(function () {
     Route::get('/shu',[shu_controller::class, 'index'])->name('index')->Middleware('auth');
@@ -30,6 +31,7 @@ Route::name('shu.')->group(function () {
 
 Route::name('pinjaman.')->group(function () {
     Route::get('/pinjaman',[pinjaman_controller::class, 'index'])->name('index')->Middleware('auth');
+    Route::get('/penyesuaian-pinjaman',[pinjaman_controller::class, 'penyesuaian'])->name('penyesuaian')->Middleware('auth');
     Route::get('/pinjaman/print/{id_pinjaman}/{id_angsuran}',[pinjaman_controller::class, 'printKwitansi'])->name('print')->Middleware('auth');
     Route::get('/pinjaman/detail/{id_pinjaman}',[pinjaman_controller::class, 'detail'])->name('detail')->Middleware('auth');
     Route::get('/pinjaman/detail/{pinjaman_id}/{angsuran_id}',[pinjaman_controller::class, 'kwitansi'])->name('detail')->Middleware('auth');
@@ -38,6 +40,7 @@ Route::name('pinjaman.')->group(function () {
     Route::post('/bunga-pinjaman',[pinjaman_controller::class, 'createBunga'])->name('bunga')->Middleware('auth');
     Route::get('/ajuakan-pinjaman',[pinjaman_controller::class, 'pengajuan'])->name('pengajuan')->Middleware('auth');
     Route::post('/ajuakan-pinjaman',[pinjaman_controller::class, 'logicPengajuan'])->name('pengajuan.logic')->Middleware('auth');
+    Route::post('/ajuakan-pinjaman-penyesuaian',[pinjaman_controller::class, 'logicPengajuanPenyesuaian'])->name('pengajuanpenyesuaian.logic')->Middleware('auth');
     Route::get('/validasi-pinjaman',[pinjaman_controller::class, 'validasi'])->name('validasi')->Middleware('auth');
     Route::post('/validasi-pinjaman/{id}',[pinjaman_controller::class, 'logicvalidasi'])->name('logic.validasi')->Middleware('auth');
     Route::get('/bayar-pinjaman',[pinjaman_controller::class, 'bayar'])->name('bayar')->Middleware('auth');
@@ -48,12 +51,16 @@ Route::name('pinjaman.')->group(function () {
     Route::post('/validasi-pinjaman/selesai/{id}',[pinjaman_controller::class, 'selesai'])->name('logic.selesai')->Middleware('auth');
     //pencairan
     Route::get('/pencairan-pinjaman',[pencairan_controller::class, 'index'])->name('pencairan')->Middleware('auth');
+  
 
 });
 
 
 Route::name('simpanan.')->group(function () {
     Route::get('/simpanan',[simpanan_controller::class, 'index'])->name('index')->Middleware('auth');
+    Route::get('/simpananWajibStaff',[simpanan_controller::class, 'simpananWajibStaff'])->name('WajibStaff')->Middleware('auth');
+    Route::get('/simpananWajibProduksi',[simpanan_controller::class, 'simpananWajibProduksi'])->name('WajibProduksi')->Middleware('auth');
+    Route::get('/simpananSukarelaStaff',[simpanan_controller::class, 'simpananSukarelaStaff'])->name('SukarelaStaff')->Middleware('auth');
     //simpanan pokok
     Route::get('/simpanan-pokok',[simpanan_controller::class, 'pokokIndex'])->name('pokok.index')->Middleware('auth');
     Route::post('/simpanan-pokok',[simpanan_controller::class, 'pokokStore'])->name('pokok.store')->Middleware('auth');
@@ -80,6 +87,7 @@ Route::name('ajax.')->group(function () {
     Route::get('/ajax/anggota/{filter}',[anggota_controller::class, 'ajaxAnggota'])->name('anggota')->Middleware('auth');
     Route::get('/ajax/anggota-kosong',[anggota_controller::class, 'ajaxAnggotaKosong'])->name('anggota.kosong')->Middleware('auth');
     Route::get('/ajax/pengajuan/{nominal}/{bulan}/{peminjam}/{tanggal}/{bunga}',[pinjaman_controller::class, 'ajax'])->Middleware('auth');
+    Route::get('/ajax/pengajuan-penyesuaian/{nominal}/{bulan}/{peminjam}/{tanggal}/{bunga}/{sudahbayar}',[pinjaman_controller::class, 'ajaxpenyesuaian'])->Middleware('auth');
     Route::get('/ajax/angsuran/{id_angsuran}',[pinjaman_controller::class, 'pembayaran'])->name('pembayaran')->Middleware('auth');
     Route::get('/ajax/validasi/{str}',[pinjaman_controller::class, 'ajaxValidasi'])->name('validasi')->Middleware('auth');
     Route::get('/ajax/simpanan/{jenis_simpanan}/{user_id}',[simpanan_controller::class, 'ajaxSimpanan'])->name('simpanan')->Middleware('auth');
@@ -94,6 +102,8 @@ Route::get('/print-simpanan',[laporan_controller::class, 'printSimpanan'])->name
 Route::get('/print-angsuran',[laporan_controller::class, 'printAngsuran'])->name('downloadAnggota')->Middleware('auth');
 Route::get('/print-anggota',[laporan_controller::class, 'printAnggota'])->name('downloadAnggota')->Middleware('auth');
 Route::get('/print-penerima-shu/{id}',[shu_controller::class, 'printPenerimaShu'])->name('downloadAnggota')->Middleware('auth');
+Route::post('/saldo-awal',[main_controller::class, 'masukansaldoawal'])->name('masukansaldoawal')->Middleware('auth');
+Route::get('/importPinjaman',[main_controller::class, 'importPinjaman'])->name('importPinjaman')->Middleware('auth');
 
 
 
@@ -103,10 +113,30 @@ Route::name('laporan.')->group(function () {
     Route::get('/laporan/simpanan-sukarela',[laporan_controller::class, 'simpananSukarela'])->name('simpananSukarela')->Middleware('auth');
     Route::get('/laporan/angsuran',[laporan_controller::class, 'angsuran'])->name('angsuran')->Middleware('auth');
     Route::get('/laporan/anggota',[laporan_controller::class, 'anggota'])->name('anggota')->Middleware('auth');
+    Route::get('/laporan/neraca-awal-tahun',[laporan_controller::class, 'neracaAwalTahun'])->name('neracaAwalTahun')->Middleware('auth');
+    Route::get('/laporan/neraca-akhir-tahun',[laporan_controller::class, 'neracaAkhirTahun'])->name('neracaAkhirTahun')->Middleware('auth');
+
+      //laporan pinjaman
+    Route::get('/pinjamanProduksi',[laporan_controller::class, 'pinjamanProduksi'])->name('pinjamanProduksi')->Middleware('auth');
+    Route::get('/pinjamanStaff',[laporan_controller::class, 'pinjamanStaff'])->name('pinjamanStaff')->Middleware('auth');
+    Route::get('/pinjamanLainya',[laporan_controller::class, 'pinjamanLainya'])->name('pinjamanLainya')->Middleware('auth');
+
+
 });
 
 Route::name('profile.')->group(function () {
     Route::resource('/profile', profile_controller::class);
+    Route::get('/saldo-awal',[laporan_controller::class, 'saldoAwal'])->name('saldoAwal')->Middleware('auth');
+    Route::get('/import-anggota',[laporan_controller::class, 'ImportAnggota'])->name('ImportAnggota')->Middleware('auth');
+    Route::get('/import-pinjaman',[laporan_controller::class, 'ImportPinjaman'])->name('ImportPinjaman')->Middleware('auth');
+    Route::get('/journal-penyesuaian',[laporan_controller::class, 'JournalPenyesuaian'])->name('journalPenyesuaian')->Middleware('auth');
+    Route::post('/journal-penyesuaian',[laporan_controller::class, 'tambahJournalPenyesuaian'])->name('journalPenyesuaian')->Middleware('auth');
+    Route::get('/akun',[laporan_controller::class, 'akun'])->name('akun')->Middleware('auth');
+    Route::get('/laba-ditahan',[laporan_controller::class, 'labaditahan'])->name('labaditahan')->Middleware('auth');
+    Route::get('/penyesuaian-shu-yang-harus-dibagi',[laporan_controller::class, 'penyesuaianshu'])->name('penyesuaianshu')->Middleware('auth');
+    Route::post('/penyesuaian-shu-yang-harus-dibagi',[laporan_controller::class, 'penyesuaianshuyangdibagi'])->name('penyesuaianshu')->Middleware('auth');
+    Route::post('/laba-ditahan',[laporan_controller::class, 'penyesuaianlabaditahan'])->name('penyesuaianlabaditahan')->Middleware('auth');
+    Route::post('/akun',[laporan_controller::class, 'tambahakun'])->name('akun')->Middleware('auth');
 });
 
 

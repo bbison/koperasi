@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('pinjamen', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('bunga_pinjaman_id');
-            $table->string('total_angsuran');
-            $table->string('lama_pinjaman');
-            $table->string('angsuran_pokok');
-            $table->string('angsuran_bunga');
+            $table->foreignId('user_id')->nullabe();
+            $table->foreignId('bunga_pinjaman_id')->nullabe();
+            $table->string('total_angsuran')->nullabe();
+            $table->string('kode')->nullabe();
+            $table->string('lama_pinjaman')->default('0');
+            $table->string('angsuran_pokok')->default('0');
+            $table->string('angsuran_bunga')->default('0');
             $table->string('angsuran_terbayar')->default('0');
-            $table->string('angsuran_belum_terbayar');
+            $table->string('angsuran_belum_terbayar')->nullabe();
             $table->string('status_pinjaman')->default('Menunggu Verifikasi');
             $table->timestamps();
         });

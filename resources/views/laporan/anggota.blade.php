@@ -4,7 +4,7 @@
         <div class="col-11 mt-3">
             <div class="row justify-content-end">
                 <div class="col-4 d-flex justify-content-end ">
-                    {{-- <form action="/download/anggota" method="post" class="row justify-content-end">
+                    <form action="/download/anggota" method="post" class="row justify-content-end">
                         @csrf
                         <button type="submit" class="btn btn-primary text-white col-12">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -14,7 +14,7 @@
                                 <path
                                     d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
                             </svg>
-                        </button> --}}
+                        </button>
                     </form>
                     <a href="/print-anggota" target="_Blank" class="mt-2 ms-5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"

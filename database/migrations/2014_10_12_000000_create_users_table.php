@@ -17,14 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->nullable();
-            $table->string('alamat');
-            $table->string('bagian');
+            $table->string('alamat')->nullable();
+            $table->string('kode')->nullable();
+            $table->string('bagian')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default(bcrypt('123abc'));
             $table->integer('simpanan_wajib')->nullable();
             $table->integer('simpanan_pokok')->nullable();
             $table->integer('simpanan_sukarela')->nullable();
-            $table->string('hak_akses')->default('Anggota');
+            $table->string('hak_akses')->default('ANGGOTA');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

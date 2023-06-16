@@ -30,12 +30,14 @@ class anggota_Controller extends Controller
             'simpanan_sukarela'=>['required'],
             'alamat'=> [],
             'bagian'=> [],
+            'hak_akses'=> [],
         ]);
         //simpan simpanan sukarela
         simpanan::create([
             'simpanan_suka_rela'=>$request->simpanan_sukarela,
             'user_id'=>user::all()->count() + 1,
-            'no_simpanan'=>user::all()->count() + 1
+            'no_simpanan'=>user::all()->count() + 1,
+            'hak_akses'=>$request->hak_akses
         ]);
 
         //simpan simpananwajib 

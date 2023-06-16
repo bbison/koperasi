@@ -20,7 +20,7 @@
                                 <label for="exampleInputEmail1" class="form-label">Bunga</label>
                                 <div class="d-flex">
                                     <input type="number" name="bunga" placeholder="Contoh: 1" class="form-input"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                                        id="exampleInputEmail1" aria-describedby="emailHelp" required step="0.01">
                                     <span class="fs-5 ms-2"> % / Tahun </span>
                                 </div>
 
@@ -67,7 +67,7 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Bunga</label>
                                     <div class="d-flex">
-                                        <input type="number" name="bunga" value="{{ $bunga->bunga }}" placeholder="Contoh: 1" class="form-input"
+                                        <input type="text" pattern="^\d+(?:\.\d{1,2})?$"  name="bunga" value="{{ $bunga->bunga }}" placeholder="Contoh: 1" class="form-input"
                                             id="exampleInputEmail1" aria-describedby="emailHelp" required>
                                         <span class="fs-5 ms-2"> % / Tahun </span>
                                     </div>

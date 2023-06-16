@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->text('no_simpanan');
-            $table->text('simpanan_wajib');
+            $table->text('simpanan_wajib')->nullable();
             $table->timestamps();
         });
     }

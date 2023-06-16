@@ -19,5 +19,4 @@
         <td>@format($angsuran_bunga )</td>
         <td>@format($total_angsuran )</td>
     </tr>
-  
 </table>

@@ -58,7 +58,6 @@ th, td {
                 <tr>
                     <th>N0</th>
                     <th>Nama</th>
-                    <th>Alamat</th>
                     <th>Simpanan Wajib</th>
                     <th>Simpanan Sukarela</th>
                     <th>Total Simpanan</th>
@@ -67,7 +66,6 @@ th, td {
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $anggota->name }}</td>
-                        <td>{{ $anggota->alamat }}</td>
                         <td class="text-end">@format($anggota->simpanan_wajib)</td>
                         <td class="text-end">@format($anggota->simpanan_sukarela)</td>
                         <td class="text-end">@format($anggota->simpanan_wajib + $anggota->simpanan_pokok + $anggota->simpanan_sukarela)</td>

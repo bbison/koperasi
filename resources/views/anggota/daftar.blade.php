@@ -37,16 +37,20 @@
                                             required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">BAGIAN</label>
-                                        <input type="text" name="bagian" placeholder="Contoh: KOPERASI SUBUR MAKMUR"
-                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            required>
+                                        <label for="exampleInputEmail1" class="form-label">STATUS ANGGOTA</label>
+                                        <select name="hak_akses" id="" class="form-control">
+                                            <option value="">== PILIH STATUS ANGGOTA ==</option>
+                                            <option value="ANGGOTA">Anggota</option>
+                                            <option value="NON ANGGOTA">Non Anggota</option>
+                                        </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Alamat </label>
-                                        <input type="text" name="alamat"
-                                            placeholder="Contoh: rt 1 rw 10 jogodipan, requiredDusun II, Gemblegan, Kec. Kalikotes, Kabupaten Klaten, Jawa Tengah"
-                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <label for="exampleInputEmail1" class="form-label">BAGIAN</label>
+                                      <select name="bagian" id="" class="form-control">
+                                        <option value="">== SILAHKAN PILIH BAGIAN ==</option>
+                                        <option value="Staff ">Staff</option>
+                                        <option value=" Produksi">Produksi</option>
+                                      </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Simpanan Wajib</label>
@@ -92,7 +96,7 @@
                         <th>ID</th>
                         <th>NAMA ANGGOTA</th>
                         <th>BAGIAN</th>
-                        <th>ALAMAT</th>
+                    
                         <th>TANGGAL MASUK</th>
                         <th>SIMPANAN WAJIB</th>
                         {{-- <th>SIMPANAN POKOK</th> --}}
@@ -103,14 +107,14 @@
                         <tr class="text-center">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $anggota->id }}</td>
-                            <td>{{ $anggota->name }}</td>
-                            <td>{{ $anggota->bagian }}</td>
-                            <td>{{ $anggota->alamat }}</td>
+                            <td class="text-start">{{ $anggota->name }}</td>
+                            <td class="text-start">{{ $anggota->bagian }}</td>
+             
                             <td>{{ $anggota->created_at }}</td>
-                            <td> <a class="text-decoration-none" href="/simpanan-wajib/detail/{{ $anggota->id }}">
+                            <td class="text-end"> <a class="text-decoration-none" href="/simpanan-wajib/detail/{{ $anggota->id }}">
                                     @format($anggota->simpanan_wajib) </a> </td>
                             {{-- <td> @format($anggota->simpanan_pokok) </td> --}}
-                            <td> @format($anggota->simpanan_sukarela) </td>
+                            <td class="text-end"> @format($anggota->simpanan_sukarela) </td>
 
                             <td>
                                 <div class="dropdown">

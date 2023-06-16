@@ -143,6 +143,34 @@ class simpanan_Controller extends Controller
         ]);
     }
 
+    //terbaru
+    public function simpananWajibStaff()
+    {
+       return view('simpanan.wajibstaff',[
+          
+            'profil'=>profil::find(1),
+            'users'=>user::where('bagian', 'STAFF')->where('simpanan_wajib','!=','0')->get()
+        ]);
+    }
+    public function simpananWajibProduksi()
+    {
+        return view('simpanan.wajibproduksi',[
+            'profil'=>profil::find(1),
+            'users'=>user::where('bagian', 'PRODUKSI')->where('simpanan_wajib','!=','0')->get()
+        ]);
+    }
+    public function simpananSukarelaStaff()
+    {
+        return view('simpanan.sukarelastaff',[
+            'profil'=>profil::find(1),
+            'users'=>user::where('bagian', 'STAFF')->where('simpanan_sukarela','!=','0')->get()
+        ]);
+    }
+    public function FunctionName()
+    {
+        # code...
+    }
+
 
      
     

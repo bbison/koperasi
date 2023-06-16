@@ -97,6 +97,35 @@ class pinjaman_controller extends Controller
         'profil'=>profil::find(1)
        ]);
     }
+
+    public function ajaxpenyesuaian($nominal, $bulan, $peminjam, $tanggal,$bunga,$sudahbayar)
+    {
+        $bnga = floatval($bunga);
+      
+
+        $bayar = intval($sudahbayar);
+
+        //angsuran pokok 
+        $angsuran_pokok = intval($nominal)/ intval($bulan);
+        //bunga angsuran = 
+        $angsuran_bunga = $nominal * ($bnga/100) /intval($bulan);
+        //total angsuran 
+        $total_angsuran = $angsuran_pokok + $angsuran_bunga;
+
+        // $total_angsuran = 
+       return view('ajax.penyesuaian',[
+        'lama_pinjam'=>$bulan,
+        'angsuran_pokok'=>$angsuran_pokok,
+        'angsuran_bunga'=>$angsuran_bunga,
+        'peminjam'=>user::find(intval($peminjam)),
+        'tanggal'=>$tanggal,
+        'bunga'=>$bnga,
+        'total_angsuran'=>$total_angsuran,
+        'nominal_pinjam'=>$nominal,
+        'profil'=>profil::find(1),
+        'sudahbayar'=>$bayar
+       ]);
+    }
     public function pembayaran($id_angsuran)
     {
         $cek = pinjaman::find($id_angsuran);
@@ -117,10 +146,10 @@ class pinjaman_controller extends Controller
     public function logicPengajuan(Request $request)
     {
         // dd($request->lama_pinjam);
-        $bnga = intval($request->bunga);
+        $bnga = floatval($request->bunga);
 
         $bunga_pinjaman_id = bunga_pinjaman::firstWhere('bunga', $bnga);
-
+        // dd($bnga);
          //angsuran pokok 
          $angsuran_pokok = intval($request->nominal_pinjaman ) / intval($request->lama_pinjaman) ;
        
@@ -231,6 +260,11 @@ class pinjaman_controller extends Controller
     }
     public function createBunga(Request $request)
     {
+    
+        // if(!$bunga){
+        //     return back()->with('pesan', 'Msukan Angka Dengan Benar');
+        // }
+        
         if(bunga_pinjaman::where('bunga',$request->bunga)->count() >= 1){
              return back()->with('pesan', 'Bunga Sudah Ada ');
         }
@@ -304,5 +338,85 @@ class pinjaman_controller extends Controller
             'id_pinjaman'=>pinjaman::find($pinjaman_id),
             'sisa_angsuran'=>angsuran::where('pinjaman_id', $pinjaman_id)->where('status','Belum Bayar')->sum('tagihan_angsuran'),
         ]);
+    }
+
+    public function penyesuaian()
+    {
+        return view('pinjaman.penyesuaian',[
+            'profil'=>profil::find(1),
+            'id_pinjaman'=>pinjaman::all()->count(),
+            'user'=>User::orderBy('name', 'ASC')->get(),
+            'lama_pinjam'=>lama_pinjam::orderBy('lama','ASC')->get(),
+            'bunga'=>bunga_pinjaman::orderBy('bunga','ASC')->get(),
+        ]);
+    }
+
+    public function logicPengajuanPenyesuaian(Request $request)
+    {
+        // dd($request);
+        $bnga = floatval($request->bunga);
+        $bunga_pinjaman_id = bunga_pinjaman::firstWhere('bunga', $bnga);
+         //angsuran pokok 
+         $angsuran_pokok = intval($request->nominal_pinjaman ) / intval($request->lama_pinjaman) ;
+         //bunga angsuran = 
+         $angsuran_bunga = $request->nominal_pinjaman * $bnga/100 /intval($request->lama_pinjaman);
+         //total angsuran 
+         $total_angsuran = ($angsuran_pokok + $angsuran_bunga) * intval($request->lama_pinjaman) ;
+         //angsudan blm bayar
+         $sudah_bayar= ($angsuran_pokok + $angsuran_bunga)*$request->sudahbayar;
+         $belum_bayar= $total_angsuran - $sudah_bayar;
+
+
+
+        //tambah ke table pinjaman
+        pinjaman::create([
+            'user_id'=>$request->peminjam,
+            'bunga_pinjaman_id' =>$bunga_pinjaman_id->id,
+            'angsuran_pokok'=>$angsuran_pokok,
+            'angsuran_bunga'=>$angsuran_bunga,
+            'lama_pinjaman'=>$request->lama_pinjaman,
+            'total_angsuran'=>$total_angsuran,
+            'angsuran_terbayar'=>$sudah_bayar,
+            'angsuran_belum_terbayar' => $belum_bayar
+        
+        ]);
+
+        //penyesuaian angsuran
+        $id = pinjaman::orderBy('created_at', 'desc')->first()->id;
+        $data =pinjaman::find($id);
+
+        //jumlah angsuran
+        // $angsuran = intval($data->total_angsuran) / intval($data->lama_pinjaman);
+        $bunga_angsuran = $data->angsuran_bunga;
+
+        $tagihan = intval(intval($data->total_angsuran) / intval($data->lama_pinjaman));
+
+        $sudahbayar = intval($request->sudahbayar);
+        for($x = 1 ; $x <= intval($data->lama_pinjaman); $x++){
+            if($x <= $sudahbayar){
+                $status = "Sudah Bayar";
+            }
+            else{
+                $status = "Belum Bayar";
+            }
+            angsuran::create([
+                'pinjaman_id'=>$id,
+                'user_id'=>$data->user->id,
+                'bunga_angsuran'=> $bunga_angsuran,
+                'bulan_angsuran'=>$x,
+                'status'=>$status,
+                'tagihan_angsuran'=> $tagihan,
+                'jatuh_tempo'=>date('Y-m-d', strtotime( '+'.$x.' month', strtotime( date('now') )))
+            ]);
+        }
+
+
+        pinjaman::find($id)->update([
+            'status_pinjaman'=>'Aktif'
+        ]);
+
+        return back()->with('pesan', 'Berhasil Silahkan Bisa Di Cek Di Data Pinjaman');
+
+
     }
 }
