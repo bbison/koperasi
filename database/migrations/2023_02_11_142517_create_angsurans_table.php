@@ -18,11 +18,12 @@ return new class extends Migration
             $table->foreignId('pinjaman_id');
             $table->foreignId('user_id');
             $table->text('bunga_angsuran');
-            $table->integer('tagihan_angsuran');
-            $table->text('bulan_angsuran');
+            $table->text('pembulatan')->nullable();
+            $table->integer('tagihan_angsuran')->nullable();
+            $table->text('bulan_angsuran')->nullable();
             $table->text('status')->default('Belum Bayar');
             $table->text('bagi_shu')->default('Belum Dibagi');
-            $table->date('jatuh_tempo');
+            $table->date('jatuh_tempo')->nullable();
             $table->timestamps();
         });
     }

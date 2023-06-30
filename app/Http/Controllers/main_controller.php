@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\pinjaman;
 use App\Models\profil;
+use App\Models\kode;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use App\Imports\UsersImport;
@@ -91,7 +92,10 @@ class main_controller extends Controller
             catatan_keuangan::create([
                 'keterangan'=> 'PENYESUAIAN SALDO AWAL',
                 'nominal'=> $request->nominal,
-                'jenis_transaksi'=>'MASUK'
+                'jenis_transaksi'=>'MASUK',
+                'akun_id'=>'1',
+                'saldo'=>$request->nominal,
+                'saldo_debit'=>$request->nominal
             ]);
             return back()->with('berhasil', 'Berhasil Mengatur Saldo Awal');
         }
@@ -102,5 +106,21 @@ class main_controller extends Controller
         return view('pinjaman.import',[
             'profil'=>profil::find(1)
         ]);
+    }
+    public function kode()
+    {
+        return view('kode',[
+            'kodes'=>kode::all(),
+            'profil'=>profil::find(1)
+        ]);
+    }
+
+    public function tambahkode(Request $request)
+    {
+        kode::create([
+            'kode'=>$request->kode,
+            'keterangan'=>$request->keterangan
+        ]);
+        return back();
     }
 }

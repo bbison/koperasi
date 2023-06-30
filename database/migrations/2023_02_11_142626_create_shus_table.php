@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('shus', function (Blueprint $table) {
             $table->id();
-            $table->text('besar_shu_kotor');
-            $table->text('besar_shu_bersih');
-            $table->text('biaya_operasional');
-            $table->text('presentase_pembagian');
+            $table->text('besar_shu_kotor')->nullable();
+            $table->text('besar_shu_dibagi')->nullable();
+            $table->text('besar_shu_bersih')->nullable();
+            $table->text('biaya_operasional')->nullable();
+            $table->text('presentase_pembagian')->nullable();
             $table->text('sisa_shu')->nullable();
             $table->timestamps();
         });

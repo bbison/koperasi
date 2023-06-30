@@ -20,8 +20,8 @@
                         <th>NO</th>
                         <th>NAMA</th>
                         <th>ID PINJAMAN</th>
-                        <th>NOMINAL Pinjaman</th>
-                        <th>NOMINAL PENGEMBALIAN</th>
+                        <th>KEKURANGAN</th>
+                        {{-- <th>NOMINAL PENGEMBALIAN</th> --}}
                         <th>LAMA PINJAMAN</th>
                         <th>BUNGA</th>
                         <th>STATUS</th>
@@ -32,14 +32,18 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $p->user->name }}</td>
                             <td>{{ $p->id }}</td>
-                            <td>@format($p->angsuran_pokok * $p->lama_pinjaman)</td>
-                            <td>@format($p->total_angsuran)</td>
+                            <td>@format($p->angsuran_belum_terbayar)</td>
+                            {{-- <td>@format($p->total_angsuran)</td> --}}
                             <td>{{ $p->lama_pinjaman }} Bulan</td>
-                            <td>{{ $p->bunga_pinjaman->bunga }} %</td>
+                            @if ($p->bunga_pinjaman_id == 0)
+                                <td></td>
+                            @else
+                                <td>{{ $p->bunga_pinjaman->bunga }} %</td>
+                            @endif
                             <td>
                                 @if ($p->status_pinjaman == 'Menunggu Verifikasi')
                                     <button class="btn btn-warning text-white">{{ $p->status_pinjaman }}</button>
-                                @elseif($p->status_pinjaman == 'Aktif')
+                                @elseif($p->status_pinjaman == 'AKTIF')
                                     <button class="btn btn-danger text-white">{{ $p->status_pinjaman }}</button>
                                 @elseif($p->status_pinjaman == 'Ditolak')
                                     <button class="btn btn-danger text-white">{{ $p->status_pinjaman }}</button>
@@ -77,7 +81,7 @@
                                         <ul class="dropdown-menu">
                                             <li>
                                                 @if ($p->status_pinjaman != 'Selesai')
-                                                    @if ($p->status_pinjaman != 'Aktif')
+                                                    @if ($p->status_pinjaman != 'AKTIF')
                                                         <form action="/validasi-pinjaman/{{ $p->id }}"
                                                             method="post">
                                                             @csrf
@@ -90,7 +94,7 @@
                                                             <button type="submit" class="dropdown-item">Ditolak</button>
                                                         </form>
                                                     @endif
-                                                    @if ($p->status_pinjaman == 'Selesai' or $p->status_pinjaman == 'Aktif')
+                                                    @if ($p->status_pinjaman == 'Selesai' or $p->status_pinjaman == 'AKTIF')
                                                         <form action="/validasi-pinjaman/selesai/{{ $p->id }}"
                                                             method="post">
                                                             @csrf

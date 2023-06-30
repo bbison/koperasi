@@ -56,10 +56,20 @@
                         </div>
                         <div class="mb-3 col-6">
                             <label for="exampleFormControlInput1" class="form-label">Bunga Per Tahun</label>
-                            <select name="bunga" id="bunga" class="form-control" required>
+                            <select name="bunga_id" id="bunga" class="form-control" required>
                                 <option value="">==Pilih Bunga==</option>
                                 @foreach ($bunga as $bunga)
-                                    <option value="{{ $bunga->bunga }}">{{ $bunga->bunga }} % </option>
+                                    <option value="{{ $bunga->id }}">{{ $bunga->bunga }} % </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label for="exampleFormControlInput1" class="form-label">Jenis Pinjaman</label>
+                            <select name="jenis_pinjaman_id" id="jenis_pinjaman" class="form-control" required>
+                                <option value="">==Pilih Jenis Pinjaman==</option>
+                                @foreach ($jenis_pinjaman as $jenis_pinjaman)
+                                    <option value="{{ $jenis_pinjaman->id }}">{{ $jenis_pinjaman->jenis_pinjaman }}  </option>
                                 @endforeach
 
                             </select>

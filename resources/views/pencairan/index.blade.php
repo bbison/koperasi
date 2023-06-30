@@ -15,18 +15,35 @@
                 <th class="text-center col-1"> PRINT</th>
             </tr>
             @foreach ($pinjaman as $pinjaman)
-                <tr>
-                    <td class="text-center"><a class="text-decoration-none" href="/pinjaman/detail/{{ $pinjaman->id }}">{{ $pinjaman->id }}</a></td>
-                    <td>{{ $pinjaman->user->name }}</td>
-                    <td class="text-end">@format( $pinjaman->angsuran_pokok * $pinjaman->lama_pinjaman )</td>
-                    <td class="text-end">@format( $pinjaman->total_angsuran )</td>
-                    <td>
-                    <form action="" method="post" class="btn"> 
-                        @csrf
-                        <a href="/print/{{ $pinjaman->id }}" target="_BLANK" class="btn btn-primary text-white">PRINT</a>
-                    </form>
-                    </td>
-                </tr>
+            @if ($pinjaman->bunga_id == 0 )
+            <tr>
+                <td class="text-center"><a class="text-decoration-none" href="/pinjaman/detail/{{ $pinjaman->id }}">{{ $pinjaman->id }}</a></td>
+                <td>{{ $pinjaman->user->name }}</td>
+                <td class="text-end">@format( $pinjaman->angsuran_belum_terbayar )</td>
+                <td class="text-end">@format( $pinjaman->angsuran_belum_terbayar )</td>
+               
+                <td>
+                <form action="" method="post" class="btn"> 
+                    @csrf
+                    <a href="/print/{{ $pinjaman->id }}" target="_BLANK" class="btn btn-primary text-white">PRINT</a>
+                </form>
+                </td>
+            </tr>
+            @else
+            <tr>
+                <td class="text-center"><a class="text-decoration-none" href="/pinjaman/detail/{{ $pinjaman->id }}">{{ $pinjaman->id }}</a></td>
+                <td>{{ $pinjaman->user->name }}</td>
+                <td class="text-end">@format( $pinjaman->angsuran_pokok * $pinjaman->lama_pinjaman )</td>
+                <td class="text-end">@format( $pinjaman->total_angsuran )</td>
+                <td>
+                <form action="" method="post" class="btn"> 
+                    @csrf
+                    <a href="/print/{{ $pinjaman->id }}" target="_BLANK" class="btn btn-primary text-white">PRINT</a>
+                </form>
+                </td>
+            </tr> 
+            @endif
+               
             @endforeach
         </table>
 

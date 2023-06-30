@@ -46,29 +46,11 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">BAGIAN</label>
-                                      <select name="bagian" id="" class="form-control">
-                                        <option value="">== SILAHKAN PILIH BAGIAN ==</option>
-                                        <option value="Staff ">Staff</option>
-                                        <option value=" Produksi">Produksi</option>
-                                      </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Simpanan Wajib</label>
-                                        <input type="number" name="simpanan_wajib" placeholder="Contoh: 500000 "
-                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            required>
-                                    </div>
-                                    {{-- <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Simpanan Pokok</label>
-                                        <input type="text" name="simpanan_pokok" placeholder="Contoh: 500000 "
-                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value='0'
-                                            required>
-                                    </div> --}}
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">SImpanan Sukarela</label>
-                                        <input type="number" name="simpanan_sukarela" placeholder="Contoh: 500000 "
-                                            class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                            required>
+                                        <select name="bagian" id="" class="form-control">
+                                            <option value="">== SILAHKAN PILIH BAGIAN ==</option>
+                                            <option value="Staff ">Staff</option>
+                                            <option value=" Produksi">Produksi</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -96,7 +78,7 @@
                         <th>ID</th>
                         <th>NAMA ANGGOTA</th>
                         <th>BAGIAN</th>
-                    
+
                         <th>TANGGAL MASUK</th>
                         <th>SIMPANAN WAJIB</th>
                         {{-- <th>SIMPANAN POKOK</th> --}}
@@ -109,9 +91,10 @@
                             <td>{{ $anggota->id }}</td>
                             <td class="text-start">{{ $anggota->name }}</td>
                             <td class="text-start">{{ $anggota->bagian }}</td>
-             
+
                             <td>{{ $anggota->created_at }}</td>
-                            <td class="text-end"> <a class="text-decoration-none" href="/simpanan-wajib/detail/{{ $anggota->id }}">
+                            <td class="text-end"> <a class="text-decoration-none"
+                                    href="/simpanan-wajib/detail/{{ $anggota->id }}">
                                     @format($anggota->simpanan_wajib) </a> </td>
                             {{-- <td> @format($anggota->simpanan_pokok) </td> --}}
                             <td class="text-end"> @format($anggota->simpanan_sukarela) </td>
@@ -145,57 +128,16 @@
                                             <form action="/keluar" method="post">
                                                 @csrf
                                                 <input type="hidden" name="user_id" value="{{ $anggota->id }}">
-                                                <button class="dropdown-item" type="submit" onclick="return confirm('Yakin Ingin Mengeluarkan {{ $anggota->name }} dengan ID {{ $anggota->id }} ?')">Keluar ? </button>
+                                                <button class="dropdown-item" type="submit"
+                                                    onclick="return confirm('Yakin Ingin Mengeluarkan {{ $anggota->name }} dengan ID {{ $anggota->id }} ?')">Keluar
+                                                    ? </button>
                                             </form>
                                         </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
-                        <!-- Modal simpanan Pokok -->
-                        <div class="modal fade" id="simpananpokok{{ $anggota->id }}" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <form action="{{ route('simpanan.pokok.store') }}" method="post">
-                                @csrf
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Simpanan Pokok</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">ID</label>
-                                                <input readonly type="text" name="id"
-                                                    placeholder="Contoh: 500000 " class="form-control"
-                                                    id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                    value="{{ $anggota->id }}">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Nama</label>
-                                                <input readonly type="text" name="name"
-                                                    placeholder="Contoh: KOPERASI SUBUR MAKMUR" class="form-control"
-                                                    id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                    value="{{ $anggota->name }}">
-                                            </div>
 
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Simpanan Pokok</label>
-                                                <input type="text" name="simpanan_pokok" placeholder="Contoh: 500000 "
-                                                    class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Tambah</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                         <!-- Modal simpanan wajib -->
                         <div class="modal fade" id="simpananwajib{{ $anggota->id }}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -209,6 +151,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Tanggal</label>
+                                                <input type="date" required name="tanggal" class="form-control">
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">ID</label>
                                                 <input readonly type="text" name="id"
@@ -253,6 +199,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="exampleInputEmail1" class="form-label">Tanggal</label>
+                                                <input type="date" required name="tanggal" class="form-control">
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputEmail1" class="form-label">ID</label>
                                                 <input readonly type="text" name="id"

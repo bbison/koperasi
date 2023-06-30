@@ -25,9 +25,6 @@ class anggota_Controller extends Controller
         // dd($request);
         $validated = $request->validate([
             'name'=>['required'],
-            'simpanan_wajib'=>['required'],
-            'simpanan_pokok'=>[''],
-            'simpanan_sukarela'=>['required'],
             'alamat'=> [],
             'bagian'=> [],
             'hak_akses'=> [],

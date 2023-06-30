@@ -17,13 +17,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <h3 class="text-center">Atur Laba Ditahan</h3>
+            <h3 class="text-center">Penyesuaian SHU</h3>
 
-            <form action="/laba-ditahan" method="post">
+            <form action="{{route('profile.penyesuaianlabaditahan')}}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nominal Laba Ditahan</label>
-                    <input type="number" name="nominal" class="form-control" id="exampleInputEmail1"
+                    <input type="number" name="sisa_shu" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nominal SHU Yang Harus Dibagi</label>
+                    <input type="number" name="harus_bagi" class="form-control" id="exampleInputEmail1"
                         aria-describedby="emailHelp">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>

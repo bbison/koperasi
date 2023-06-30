@@ -34,11 +34,93 @@ class DatabaseSeeder extends Seeder
             'bendahara'=>'bendahara',
         ]);
 
-        // \App\Models\pembagian_shu::create([
-        //     'user_id'=>1,
-        //     'shu_id'=>1,
-        //     'nama'=>'bagas',
-        //     'nominal'=>10000
-        // ]);
+        //seed bunga
+        \App\Models\bunga_pinjaman::create([
+            'bunga'=>8
+        ]);
+        \App\Models\bunga_pinjaman::create([
+            'bunga'=>6
+        ]);
+        \App\Models\bunga_pinjaman::create([
+            'bunga'=>5
+        ]);
+
+        //jenis_pinjaman
+        \App\Models\jenis_pinjaman::create([
+            'jenis_pinjaman'=>'Putang Staff',
+            'kode'=>'1.1.3',
+        ]);
+        \App\Models\jenis_pinjaman::create([
+            'jenis_pinjaman'=>'Putang Produksi',
+            'kode'=>'1.1.2',
+        ]);
+        \App\Models\jenis_pinjaman::create([
+            'jenis_pinjaman'=>'Putang Kacamata',
+            'kode'=>'1.1.2',
+        ]);
+        \App\Models\jenis_pinjaman::create([
+            'jenis_pinjaman'=>'Piutang Belum Terbayar',
+            'kode'=>'1.1.4',
+        ]);
+        \App\Models\jenis_pinjaman::create([
+            'jenis_pinjaman'=>'Hutang Lainya',
+            'kode'=>'1.1.3',
+        ]);
+        //lama pinjaman
+        \App\Models\lama_pinjam::create([
+            'lama'=>1
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>2
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>3
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>4
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>5
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>6
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>7
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>8
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>9
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>10
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>11
+        ]);
+        \App\Models\lama_pinjam::create([
+            'lama'=>12
+        ]);
+        \App\Models\akun::create([
+            'nama_akun'=>'Kas',
+            'no_akun'=>'1.1.1'
+        ]);
+        \App\Models\akun::create([
+            'nama_akun'=>'Biaya Operasional',
+            'no_akun'=>'5.5.1.001'
+        ]);
+        \App\Models\akun::create([
+            'nama_akun'=>'Biaya Pembulatan',
+            'no_akun'=>'5.5.1.002'
+        ]);
+
+
+
+
+
+
+
     }
 }

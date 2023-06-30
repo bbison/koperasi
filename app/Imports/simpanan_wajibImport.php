@@ -18,6 +18,7 @@ class simpanan_wajibImport implements ToModel
             'user_id'=>$row[0] + 1,
             'no_simpanan'=>$row[0] + 1,
             'simpanan_wajib'=>$row[4],
+            'created_at'=>$row[7],
         ]);
     }
 }

@@ -22,6 +22,7 @@ class pinjamanImport implements ToModel
             'status_pinjaman'=>$row[3],
             'total_angsuran'=>$row[4],
             'lama_pinjam'=>$row[5],
+            'jenis_pinjaman_id'=>$row[6],
         ]);
     }
 }

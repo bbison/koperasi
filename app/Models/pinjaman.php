@@ -19,6 +19,10 @@ class pinjaman extends Model
     {
         return $this->belongsTo(bunga_pinjaman::class);
     }
+    public function jenis_pinjaman()
+    {
+        return $this->belongsTo(jenis_pinjaman::class);
+    }
     public function angsuran()
     {
         return $this->hasMany(angsuran::class);

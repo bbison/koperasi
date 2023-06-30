@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('pinjamen', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullabe();
+            $table->foreignId('catatan_keuangan_id')->default('0')->nullabe();
+            $table->foreignId('jenis_pinjaman_id')->nullabe();
             $table->foreignId('bunga_pinjaman_id')->nullabe();
             $table->string('total_angsuran')->nullabe();
             $table->string('kode')->nullabe();

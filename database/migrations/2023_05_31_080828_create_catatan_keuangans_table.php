@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('catatan_keuangans', function (Blueprint $table) {
             $table->id();
-            $table->text('keterangan');
-            $table->text('nominal');
-            $table->text('jenis_transaksi');
+            $table->foreignId('akun_id')->nullable();
+            $table->text('keterangan')->nullable();
+            $table->text('nominal')->nullable();
+            $table->text('saldo_debit')->nullable();
+            $table->text('saldo_kredit')->nullable();
+            $table->text('saldo')->nullable();
+            $table->text('jenis_transaksi')->nullable();
             $table->timestamps();
         });
     }

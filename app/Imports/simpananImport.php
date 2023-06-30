@@ -18,6 +18,7 @@ class simpananImport implements ToModel
             'user_id'=>$row[0] +1,
             'no_simpanan'=>$row[0] +1 ,
             'simpanan_suka_rela'=>$row[5],
+            'created_at'=>$row[7],
         ]);
     }
 }

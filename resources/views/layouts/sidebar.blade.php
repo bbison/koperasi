@@ -84,6 +84,31 @@
                                         </div>
                                         Pengaturan Lama Pinjam
                                     </a>
+                                    <a class="nav-link" href="{{ route('pinjaman.jenispinjaman') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Pengaturan Jenis Pinjaman
+                                    </a>
+                                    <a class="nav-link" href="{{ route('profile.saldoAwal') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Saldo Awal
+                                    </a>
+                                    <a class="nav-link" href="{{ route('profile.ImportAnggota') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Import Data Anggota
+                                    </a>
+                                    <a class="nav-link" href="{{ route('profile.labaditahan') }}">
+                                        <div class="sb-nav-link-icon">
+
+                                        </div>
+                                        Penjesuaian Laba Ditahan Dan SHU Harus DIbagi
+                                    </a>
+                                 
                                 </nav>
                             </div>
                         @endif
@@ -137,6 +162,11 @@
                                     </div>
                                   Piutang Lainya
                                 </a>
+                                <a class="nav-link" href="{{ route('laporan.hutangLainya') }}">
+                                    <div class="sb-nav-link-icon">
+                                    </div>
+                                  Hutang Lainya
+                                </a>
                                 <a class="nav-link" href="{{ route('importPinjaman') }}">
                                     <div class="sb-nav-link-icon">
                                     </div>
@@ -172,7 +202,7 @@
                                 </div>
                                 Pencairan Pinjaman
                             </a>
-                            <a class="nav-link" href="{{ route('pinjaman.bayar') }}">
+                            <a class="nav-link" href="{{ route('pinjaman.bayarpinjaman') }}">
                                 <div class="sb-nav-link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
@@ -265,67 +295,41 @@
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
                                 data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('laporan.simpanan') }}">Simpanan</a>
+                                    {{-- <a class="nav-link" href="{{ route('laporan.simpanan') }}">Simpanan</a>
                                     <a class="nav-link" href="{{ route('laporan.angsuran') }}">Angsuran</a>
-                                    <a class="nav-link" href="{{ route('laporan.anggota') }}">Data Anggota</a>
+                                    <a class="nav-link" href="{{ route('laporan.anggota') }}">Data Anggota</a> --}}
                                     <a class="nav-link" href="{{ route('laporan.neracaAwalTahun') }}">Neraca</a>
                                     {{-- <a class="nav-link" href="{{ route('laporan.neracaAkhirTahun') }}">Neraca Akhir Tahun</a> --}}
                                 </nav>
                             </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#etting" aria-expanded="false" aria-controls="pagesCollapseError">
+                            <a class="nav-link collapsed" href="{{route('laporan.journal')}}">
                                 <div class="sb-nav-link-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                        fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16"
+                                        class="me-1">
                                         <path
-                                            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                                            d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
+                                        <path
+                                            d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
                                     </svg>
                                 </div>
-                                Journal Penyesuaian
+                                Buku Besar
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="etting" aria-labelledby="headingOne"
-                                data-bs-parent="#sidenavAccordionPages">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('profile.saldoAwal') }}">
-                                        <div class="sb-nav-link-icon">
-
-                                        </div>
-                                        Saldo Awal
-                                    </a>
-                                    <a class="nav-link" href="{{ route('pinjaman.penyesuaian') }}">
-                                        <div class="sb-nav-link-icon">
-
-                                        </div>
-                                        Penyesuaian Pinjaman
-                                    </a>
-                                    <a class="nav-link" href="{{ route('profile.ImportAnggota') }}">
-                                        <div class="sb-nav-link-icon">
-
-                                        </div>
-                                        Import Data Anggota
-                                    </a>
-                                    <a class="nav-link" href="{{ route('profile.labaditahan') }}">
-                                        <div class="sb-nav-link-icon">
-
-                                        </div>
-                                        Penjesuaian Laba Ditahan
-                                    </a>
-                                    <a class="nav-link" href="{{ route('profile.penyesuaianshu') }}">
-                                        <div class="sb-nav-link-icon">
-
-                                        </div>
-                                        Penjesuaian SHU Yang Dibagi
-                                    </a>
-                                    {{-- <a class="nav-link" href="{{ route('profile.ImportPinjaman') }}">
+                            <a class="nav-link collapsed" href="{{route('laporan.jurnal')}}">
                                 <div class="sb-nav-link-icon">
-
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-journals" viewBox="0 0 16 16"
+                                        class="me-1">
+                                        <path
+                                            d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
+                                        <path
+                                            d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
+                                    </svg>
                                 </div>
-                                Import Pinjaman
-                            </a> --}}
-                                </nav>
-                            </div>
+                                Journal
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
                         @endif
 
 

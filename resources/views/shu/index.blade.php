@@ -65,6 +65,12 @@
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">NOMINAL SHU KOTOR</label>
+                                            <input type="date" name="tanggal" placeholder="Contoh: 5000000"
+                                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                       " required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">NOMINAL SHU KOTOR</label>
                                             <input type="text" name="nominal" placeholder="Contoh: 5000000"
                                                 class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                                                 value="{{ $total_shu_kotor }}" readonly>
@@ -132,7 +138,12 @@
                                 <td>@format($shu->biaya_operasional)</td>
                                 <td>@format($shu->besar_shu_bersih)</td>
                                 <td>@format($shu->presentase_pembagian) %</td>
-                                <td>@format($shu->besar_shu_bersih - $shu->sisa_shu) </td>
+                                <td>
+                          
+                                    @format($shu->besar_shu_dibagi) 
+                                        
+                                   
+                                </td>
                                 <td>@format($shu->sisa_shu)</td>
                                 <td>
                                     <div class="dropdown">
